@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import axios from 'axios'
-import Slider from 'react-native-slider'
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import axios from 'axios';
+import Slider from 'react-native-slider';
 
 export default class Forward extends Component {
   state = {
-    api: "192.168.43.57",
-    port: "8000",
-    value: 0
+    api: '192.168.43.57',
+    port: '8000',
+    value: 0,
   };
   onClick = code => {
-
-    console.log("onclick", code);
-    const { api, port } = this.state;
+    console.log('onclick', code);
+    const {api, port} = this.state;
     axios
-      .post(`http://${api}:${port}/save`, { code })
+      .post(`http://${api}:${port}/save`, {code})
       .then(res => {
-        console.log("res", res);
+        console.log('res', res);
       })
-      .catch(function (error) {
-        console.log("error", error);
+      .catch(function(error) {
+        console.log('error', error);
       });
   };
 
-  onValueOneChange = async (value) => {
-    var speed = value * 250
-    const { api, port } = this.state;
-    console.log(speed)
-    const controlSpeed = await axios.post(`http://${api}:${port}/save`,
-      { speed, code: 10 }
-    )
+  onValueOneChange = async value => {
+    var speed = value * 250;
+    const {api, port} = this.state;
+    console.log(speed);
+    const controlSpeed = await axios.post(`http://${api}:${port}/save`, {
+      speed,
+      code: 10,
+    });
     // console.log(controlSpeed)
-  }
+  };
 
   render() {
     return (
@@ -44,7 +44,8 @@ export default class Forward extends Component {
         />
         <Slider
           value={this.state.value}
-          onValueChange={(value) => this.onValueOneChange(value)} />
+          onValueChange={value => this.onValueOneChange(value)}
+        />
         <Button
           onPress={() => this.onClick(6)}
           title="Stop"
@@ -56,6 +57,4 @@ export default class Forward extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
