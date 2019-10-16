@@ -27,7 +27,7 @@ export default class extends React.Component {
     };
   }
 
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     Animated.timing(this.state.offset, {
       duration: 150,
       toValue: 0

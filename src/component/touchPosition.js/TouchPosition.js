@@ -16,7 +16,6 @@ import io from "react-native-socket.io-client";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    YellowBox.ignoreWarnings(["Setting a timer"]);
     this.state = {
       api: "192.168.0.29",
       port: "8080",
@@ -39,6 +38,7 @@ export default class App extends Component {
   }
 
   //clear socket events
+
   componentWillUnmount() {
     this.deinitialize();
   }
@@ -46,7 +46,6 @@ export default class App extends Component {
   deinitialize = () => {
     this.removeSocketEvents(this.socket, this.socketEvents);
   };
-
 
   removeSocketEvents = (socket, events) => {
     if (events.length > 0) {
@@ -89,7 +88,7 @@ export default class App extends Component {
         this.setState({ socketIsConnected: true });
       });
       this.socket.emit("connected", "connected");
-      this.socket.on(`message`, message => {
+      this.socket.on("message", message => {
         console.log(message);
       });
       this.socket.on("disconnect", () => {
@@ -118,8 +117,7 @@ export default class App extends Component {
             moveType: moveData.moveType
           };
 
-          const ssss = this.socket.emit("controller", control);
-          // console.log(ssss);
+          this.socket.emit("controller", control);
           let { left, top } = this.state;
           left += gestureState.moveX - gestureState.previousMoveX;
           top += gestureState.moveY - gestureState.previousMoveY;

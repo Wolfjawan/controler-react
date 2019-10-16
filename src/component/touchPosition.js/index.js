@@ -10,14 +10,9 @@ export default class App extends Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#9BC53D',
-  },
-  touchPositionStyle: {
-    width: 300,
-    height: 300,
-  },
+  }
 });
